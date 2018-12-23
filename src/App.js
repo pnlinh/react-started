@@ -44,9 +44,28 @@ const Notification = (props) => {
 };
 
 class Profile extends Component {
+    constructor(props) {
+        super(props);
+
+        this.handleOnClick = this.handleOnClick.bind(this);
+    }
+
     componentWillReceiveProps(nextProps, nextContext) {
         // debugger;
         console.log('componentWillReceiveProps da chay');
+    }
+
+    handleOnClick(event) {
+        event.preventDefault();
+
+        this.props.onChangeWhenClick({
+            name: 'pnlinh',
+            job: 'Dev',
+            optional: {
+                age: 23,
+                phone: '0376986953'
+            }
+        });
     }
 
     render() {
@@ -54,6 +73,7 @@ class Profile extends Component {
             <div>
                 <div>Name: {this.props.name}</div>
                 <div>Job: {this.props.job}</div>
+                <button onClick={this.handleOnClick}>Change !!!</button>
             </div>
         );
     }
@@ -68,11 +88,13 @@ class Person extends Component {
         // Init state
         this.state = {
             name: 'Ngoc Linh',
-            job: 'Developer'
+            job: 'Developer',
+            optional: {}
         };
 
         // Binding
         this.handleOnChange = this.handleOnChange.bind(this);
+        this.onChangeWhenClick = this.onChangeWhenClick.bind(this);
     }
 
     componentWillMount() {
@@ -119,6 +141,10 @@ class Person extends Component {
         });
     }
 
+    onChangeWhenClick(obj) {
+        this.setState(obj);
+    }
+
     render() {
         console.log('Render is running...');
 
@@ -126,7 +152,7 @@ class Person extends Component {
             <div>
                 <input type="text" name="name" onChange={this.handleOnChange} value={this.state.name}/>
 
-                <Profile name={this.state.name} job={this.state.job}/>
+                <Profile name={this.state.name} job={this.state.job} onChangeWhenClick={this.onChangeWhenClick}/>
             </div>
         );
     }
