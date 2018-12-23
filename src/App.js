@@ -32,9 +32,22 @@ function MultipleLines(props) {
     );
 }
 
+const Notification = (props) => {
+    // const { title, content } = props;
+    const { title } = props;
+    return (
+        <div className="notification">
+            <h2 className="message__title">{title}</h2>
+            <p>{props.children}</p>
+        </div>
+    );
+};
+
 class Person extends Component {
     constructor(props) {
         super(props);
+
+        console.log('Constructor is running...');
 
         // Init state
         this.state = {
@@ -46,12 +59,44 @@ class Person extends Component {
         this.handleOnChange = this.handleOnChange.bind(this);
     }
 
+    componentWillMount() {
+        console.log('componentWillMount is running...');
+    }
+
+    componentDidMount() {
+        console.log('componentDidMount is running...');
+    }
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        console.log('componentWillReceiveProps is running...');
+    }
+
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        debugger;
+
+        console.log('shouldComponentUpdate is running...');
+
+        return true;
+    }
+
+    componentWillUpdate(nextProps, nextState, nextContext) {
+        console.log('componentWillUpdate is running...');
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log('componentDidUpdate is running...');
+    }
+
+    componentWillUnmount() {
+        console.log('componentWillUnmount is running...');
+    }
+
     handleOnChange(event) {
         const target = event.target;
         const value = target.value;
         const name = target.name;
 
-        console.log(target, name, value);
+        // console.log(target, name, value);
 
         this.setState({
             [name]: value
@@ -59,6 +104,8 @@ class Person extends Component {
     }
 
     render() {
+        console.log('Render is running...');
+
         return (
             <div>
                 <input type="text" name="name" onChange={this.handleOnChange} value={this.state.name}/>
@@ -76,9 +123,18 @@ class App extends Component {
         return (
             <div className="App">
                 <header className="App-header">
-                    <p>
-                        Hello ReactJS
-                    </p>
+                    {/*<p>Hello ReactJS</p>*/}
+
+                    {/*<Notification*/}
+                        {/*title = "title..."*/}
+                        {/*content = "content..."*/}
+                    {/*/>*/}
+
+                    {/*<Notification*/}
+                        {/*title = "title..."*/}
+                    {/*>*/}
+                        {/*Content...*/}
+                    {/*</Notification>*/}
 
                     {/*<One name="One"/>*/}
                     {/*<Two name="Two"/>*/}
@@ -89,6 +145,10 @@ class App extends Component {
                     {/*<Person name="Ai đó" age="20"/>*/}
                     <Person age={23}/>
                 </header>
+
+                <div className="footer">
+
+                </div>
             </div>
         );
     }
