@@ -34,7 +34,7 @@ function MultipleLines(props) {
 
 const Notification = (props) => {
     // const { title, content } = props;
-    const { title } = props;
+    const {title} = props;
     return (
         <div className="notification">
             <h2 className="message__title">{title}</h2>
@@ -42,6 +42,22 @@ const Notification = (props) => {
         </div>
     );
 };
+
+class Profile extends Component {
+    componentWillReceiveProps(nextProps, nextContext) {
+        // debugger;
+        console.log('componentWillReceiveProps da chay');
+    }
+
+    render() {
+        return (
+            <div>
+                <div>Name: {this.props.name}</div>
+                <div>Job: {this.props.job}</div>
+            </div>
+        );
+    }
+}
 
 class Person extends Component {
     constructor(props) {
@@ -72,7 +88,7 @@ class Person extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-        debugger;
+        // debugger;
 
         console.log('shouldComponentUpdate is running...');
 
@@ -110,9 +126,7 @@ class Person extends Component {
             <div>
                 <input type="text" name="name" onChange={this.handleOnChange} value={this.state.name}/>
 
-                <div>Name: {this.state.name}</div>
-                <div>Age: {this.props.age}</div>
-                <div>Job: {this.state.job}</div>
+                <Profile name={this.state.name} job={this.state.job}/>
             </div>
         );
     }
@@ -126,14 +140,14 @@ class App extends Component {
                     {/*<p>Hello ReactJS</p>*/}
 
                     {/*<Notification*/}
-                        {/*title = "title..."*/}
-                        {/*content = "content..."*/}
+                    {/*title = "title..."*/}
+                    {/*content = "content..."*/}
                     {/*/>*/}
 
                     {/*<Notification*/}
-                        {/*title = "title..."*/}
+                    {/*title = "title..."*/}
                     {/*>*/}
-                        {/*Content...*/}
+                    {/*Content...*/}
                     {/*</Notification>*/}
 
                     {/*<One name="One"/>*/}
